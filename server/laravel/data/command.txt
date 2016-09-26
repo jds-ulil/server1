@@ -1,0 +1,13 @@
+//create project
+composer create-project laravel/laravel --prefer-dist
+
+//update
+composer update
+
+//create table
+php artisan migrate:make create_users_table --create=users
+
+//run seed
+php artisan db:seed
+
+php artisan asset:publish --path="vendor/twitter/bootstrap/dist" bootstrap/css

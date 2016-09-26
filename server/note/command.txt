@@ -1,0 +1,20 @@
+1.create migrate
+php artisan migrate:make _migrate_name_ --tabble=tablename
+2.migration all
+php artisan migrate
+3.reset migrate (when nothing to migrate)
+php artisan migrate:reset
+
+
+
+Seeding (sample data)
+1.run seeder
+php artisan db:seed
+*after create seed and add to databaseseeder 
+
+
+create controller
+>php artisan controller:make namaController
+
+check routes
+>php artisan routes
