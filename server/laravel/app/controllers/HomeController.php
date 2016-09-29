@@ -23,7 +23,8 @@ class HomeController extends BaseController {
 	public function doLogin()
 	{
 		$rules = array(
-			'email'    => 'required|email', // make sure the email is an actual email
+			//'email'    => 'required|email', // make sure the email is an actual email
+			'email' => 'required',
 			'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
 		);
 
@@ -39,7 +40,7 @@ class HomeController extends BaseController {
 
 			// create our user data for the authentication
 			$userdata = array(
-				'email'     => Input::get('email'),
+				'name'     => Input::get('email'),
 				'password'  => Input::get('password')
 			);
 

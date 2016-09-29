@@ -149,6 +149,7 @@ if ( $.fn.DataTable.TableTools ) {
 
 /* Table initialisation */
 $(document).ready(function() {
+	/*
 	$('#example').dataTable( {
 		"sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
 		"sPaginationType": "bootstrap",
@@ -156,4 +157,5 @@ $(document).ready(function() {
 			"sLengthMenu": "_MENU_ records per page"
 		}
 	} );
+	*/
 } );

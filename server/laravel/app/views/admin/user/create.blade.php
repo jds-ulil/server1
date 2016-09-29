@@ -18,7 +18,8 @@
 
         <div class="col-md-8">
             <div class="row">
-                {{ HTML::ul($errors->all()) }}
+                {{ HTML::ul($errors->all())
+                }}
                 <div class="panel panel-default bootstrap-admin-no-table-panel">
                     <div class="panel-heading">
                         <div class="text-muted bootstrap-admin-box-title">Form Example</div>
@@ -27,7 +28,7 @@
                     <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
                         {{ Form::open(array('url' => 'admin/users', 'class' => 'form-horizontal')) }}
 
-                        <div class="form-group">
+                        <div class="form-group @if($errors->has('name')) has-error @endif ">
                             {{ Form::label('inputName', 'Nama', array(
                                 'class' => 'col-lg-2 control-label',
                                 )) }}
@@ -36,22 +37,24 @@
                                 'class' => 'form-control',
                                 'id' => 'inputName',
                                 )) }}
+                            <span class="help-block">{{$errors->first('name')}}</span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group @if($errors->has('email')) has-error @endif ">
                             {{ Form::label('inputEmail', 'Email', array(
                                 'class' => 'col-lg-2 control-label',
                                 )) }}
                             <div class="col-lg-10">
-                                {{ Form::text('name', Input::old('name'), array(
+                                {{ Form::text('email', Input::old('email'), array(
                                     'class' => 'form-control',
                                     'id' => 'inputName',
                                     )) }}
+                                <span class="help-block">{{$errors->first('email')}}</span>
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group @if($errors->has('password')) has-error @endif ">
                             {{ Form::label('inputPassword', 'Password', array(
                                 'class' => 'col-lg-2 control-label',
                                 )) }}
@@ -60,6 +63,7 @@
                                     'class' => 'form-control',
                                     'id' => 'inputPassword',
                                     )) }}
+                                <span class="help-block">{{$errors->first('password')}}</span>
                             </div>
                         </div>
 

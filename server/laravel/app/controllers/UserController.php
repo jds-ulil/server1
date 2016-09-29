@@ -45,6 +45,29 @@ class UserController extends \BaseController {
 	public function store()
 	{
 		//
+		$rules = array(
+			'name'       => 'required',
+			'email'      => 'required|email|unique:users',
+			'password' => 'required|min:3'
+		);
+		$validator = Validator::make(Input::all(), $rules);
+
+		// process the login
+		if ($validator->fails()) {
+			return Redirect::to('admin/users/create')
+				->withErrors($validator)
+				->withInput(Input::except('password'));
+		} else {
+			$user = new User;
+			$user->name       = Input::get('name');
+			$user->email      = Input::get('email');
+			$user->password = Input::get('password');
+			$user->save();
+
+			// redirect
+			Session::flash('message', 'Successfully created Users!');
+			return Redirect::to('admin/users/');
+		}
 	}
 
 

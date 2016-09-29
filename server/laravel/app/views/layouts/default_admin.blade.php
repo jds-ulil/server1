@@ -16,5 +16,7 @@
 
     @include('layouts.footer')
     @yield('addjs')
+
+    @yield('page-script')
 </body>
 </html>
