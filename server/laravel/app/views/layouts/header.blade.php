@@ -10,7 +10,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="about.html">Admin Panel</a>
+                    <a class="navbar-brand" href="{{ URL::to('admin/index') }}">Admin Panel</a>
                 </div>
                 <div class="collapse navbar-collapse main-navbar-collapse">
                     <ul class="nav navbar-nav">

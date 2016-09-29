@@ -33,8 +33,7 @@ class UserController extends \BaseController {
 		$nerds = User::all();
 
 		// load the view and pass the nerds
-		return View::make('admin.user.index')
-			->with('user', $nerds);
+		return View::make('admin.user.create');
 	}
 
 

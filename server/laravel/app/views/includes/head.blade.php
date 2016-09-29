@@ -1,7 +1,3 @@
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="author" content="Coe">
-
 {{ HTML::style('tb/css/bootstrap.css') }}
 {{ HTML::style('tb/css/bootstrap-theme.min.css') }}
 {{ HTML::script('tb/js/bootstrap.min.js') }}

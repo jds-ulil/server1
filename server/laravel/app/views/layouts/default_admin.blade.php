@@ -1,8 +1,11 @@
 <!doctype html>
 <html>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="Coe">
 <head>
-    @include('includes.head_admin')
     @yield('addcss')
+    @include('includes.head_admin')
 </head>
 <body>
     @include('layouts.header')
