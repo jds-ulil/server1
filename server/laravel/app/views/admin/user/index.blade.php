@@ -84,10 +84,10 @@
                 //if (confirm("Hapus?")) {
                     var url= window.location;
                     $.ajax({
-                        url: url + 'admin/users/index',
                         method: 'DELETE',
-                        data: "tes",
-                        dataType: '',
+                        url: url + '1',
+                        data: { _method:"DELETE" },
+                        dataType: 'DELETE',
                         success: function( data, status, xhr ) {
                             console.log('sukses');
                         }

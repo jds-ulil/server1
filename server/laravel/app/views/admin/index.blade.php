@@ -8,7 +8,8 @@
                     <a href="{{ URL::to('admin/index') }}"><i class="glyphicon glyphicon-chevron-right"></i>index</a>
                 </li>
                 <li>
-                    <a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false"><i class="glyphicon glyphicon-chevron-down"></i>User</a>
+                    <a href="#" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">
+                        <i class="glyphicon glyphicon-chevron-right"></i>User</a>
                     <ul class="nav collapse bootstrap-admin-navbar-side" role="menu" id="submenu1">
                         <li><a href="{{ URL::to('admin/users') }}"><i class="glyphicon glyphicon-chevron-right"></i>Index</a></li>
                         <li><a href="{{ URL::to('admin/users/create') }}"><i class="glyphicon glyphicon-chevron-right"></i>Create</a></li>

@@ -1,0 +1,3 @@
+.glyphicon-menu-down:before {
+    content: "\e080" !important;
+}

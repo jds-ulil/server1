@@ -611,6 +611,11 @@ if (typeof jQuery === 'undefined') {
       .removeClass('collapsed')
       .attr('aria-expanded', true)
 
+    this.$trigger.find('i')
+        .removeClass('glyphicon-chevron-right')
+        .addClass('glyphicon-chevron-down')
+
+
     this.transitioning = 1
 
     var complete = function () {
@@ -650,6 +655,10 @@ if (typeof jQuery === 'undefined') {
     this.$trigger
       .addClass('collapsed')
       .attr('aria-expanded', false)
+
+    this.$trigger.find('i')
+        .removeClass('glyphicon-chevron-down')
+        .addClass('glyphicon-chevron-right')
 
     this.transitioning = 1
 
