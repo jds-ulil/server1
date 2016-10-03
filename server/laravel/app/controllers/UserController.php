@@ -115,8 +115,11 @@ class UserController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
-		echo "ssss";
+		// delete
+		$nerd = User::find($id);
+		$nerd->delete();
+
+		// redirect
 	}
 
 

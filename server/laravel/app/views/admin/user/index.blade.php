@@ -8,6 +8,8 @@
 
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
+    @else
+        <div class="info-text"></div>
     @endif
 
     <div class="row">
@@ -46,7 +48,7 @@
                                         <td>{{ $value->name }}</td>
                                         <td>{{ $value->email }}</td>
                                         <td>
-                                            <a href="#"><button class="btn btn-sm btn-danger deletedata"><i class="glyphicon glyphicon-trash"></i>Delete</button></a>
+                                            <a href="javascript:;" onclick="deleteData({{ $value->id }}, this);"><button class="btn btn-sm btn-danger deletedata"><i class="glyphicon glyphicon-trash"></i>Delete</button></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -68,8 +70,9 @@
 
 @section('page-script')
     <script type="text/javascript">
+        var dataTable1;
         $(document).ready( function () {
-            $('#example').dataTable( {
+            dataTable1 = $('#example').DataTable( {
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
                 "oLanguage": {
@@ -79,23 +82,48 @@
                     { 'bSortable': false, 'aTargets': [ 3 ] }
                 ]
             } );
+        });
 
-            $('.deletedata').on('click',function(){
-                //if (confirm("Hapus?")) {
-                    var url= window.location;
-                    $.ajax({
-                        method: 'DELETE',
-                        url: url + '1',
-                        data: { _method:"DELETE" },
-                        dataType: 'DELETE',
-                        success: function( data, status, xhr ) {
-                            console.log('sukses');
-                        }
-                    });
+        $.fn.dataTableExt.oApi.fnStandingRedraw = function(oSettings) {
+            //redraw to account for filtering and sorting
+            // concept here is that (for client side) there is a row got inserted at the end (for an add)
+            // or when a record was modified it could be in the middle of the table
+            // that is probably not supposed to be there - due to filtering / sorting
+            // so we need to re process filtering and sorting
+            // BUT - if it is server side - then this should be handled by the server - so skip this step
+            if(oSettings.oFeatures.bServerSide === false){
+                var before = oSettings._iDisplayStart;
+                oSettings.oApi._fnReDraw(oSettings);
+                //iDisplayStart has been reset to zero - so lets change it back
+                oSettings._iDisplayStart = before;
+                oSettings.oApi._fnCalculateEnd(oSettings);
+            }
+
+            //draw the 'current' page
+            oSettings.oApi._fnDraw(oSettings);
+        };
+
+        function deleteData(id,thisObj) {
+            //if (confirm("Hapus?")) {
+            var url= "users/" + id;
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    _method:"DELETE"
+                },
+                success: function( data, status, xhr ) {
+                    $(".info-text").text('Successfully deleted the nerd!');
+                    $(".info-text").addClass("alert alert-info");
+
+                    var row = $(thisObj).parents("tr:first");
+                    var nRow = row[0];
+                    $('.dataTable').dataTable().fnDeleteRow(nRow);
+                }
+            });
 //                } else {
 //                }
-            });
-        });
+        }
     </script>
 @stop
 
