@@ -84,27 +84,8 @@
             } );
         });
 
-        $.fn.dataTableExt.oApi.fnStandingRedraw = function(oSettings) {
-            //redraw to account for filtering and sorting
-            // concept here is that (for client side) there is a row got inserted at the end (for an add)
-            // or when a record was modified it could be in the middle of the table
-            // that is probably not supposed to be there - due to filtering / sorting
-            // so we need to re process filtering and sorting
-            // BUT - if it is server side - then this should be handled by the server - so skip this step
-            if(oSettings.oFeatures.bServerSide === false){
-                var before = oSettings._iDisplayStart;
-                oSettings.oApi._fnReDraw(oSettings);
-                //iDisplayStart has been reset to zero - so lets change it back
-                oSettings._iDisplayStart = before;
-                oSettings.oApi._fnCalculateEnd(oSettings);
-            }
-
-            //draw the 'current' page
-            oSettings.oApi._fnDraw(oSettings);
-        };
-
         function deleteData(id,thisObj) {
-            //if (confirm("Hapus?")) {
+            if (confirm("Hapus?")) {
             var url= "users/" + id;
             $.ajax({
                 type: 'POST',
@@ -119,10 +100,17 @@
                     var row = $(thisObj).parents("tr:first");
                     var nRow = row[0];
                     $('.dataTable').dataTable().fnDeleteRow(nRow);
+                    setTimeout(
+                            function()
+                            {
+                                //do something special
+                                $( ".info-text" ).slideUp().fadeIn(400);
+                                $(".info-text").text('').removeClass("alert alert-info");
+                            }, 5000);
                 }
             });
-//                } else {
-//                }
+                } else {
+                }
         }
     </script>
 @stop
