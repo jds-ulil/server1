@@ -27,5 +27,9 @@ Route::get('logout', array('uses' => 'HomeController@doLogout'));
 
 Route::get('admin/index', array('uses' => 'AdminController@showIndex'))->before('isLogin');
 
+Route::get('admin/info/', array('uses' => 'AdminController@infoPage'));
+
 //usercontroller
 Route::resource('admin/users', 'UserController');
+
+Route::post('admin/users/errorCheck', array('uses' => 'UserController@ajaxChecking'));

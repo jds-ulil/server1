@@ -36,7 +36,24 @@ class UserController extends \BaseController {
 		return View::make('admin.user.create');
 	}
 
+	public function ajaxChecking(){
+		$key = Input::get('key');
+		$val = Input::get('val');
+		// Setup the validator
+		$rules = array('email' => 'required|email', 'password' => 'required');
 
+		$validator = Validator::make(array($key => $val), array($key => $rules[$key]));
+		// Validate the input and return correct response
+				if ($validator->fails())
+				{
+					$messages = $validator->messages();
+					return Response::json(array(
+						$messages->first($key)
+					), 400); // 400 being the HTTP code for an invalid request.*/
+				}
+				return Response::json(array('success' => true), 200);
+		//
+	}
 	/**
 	 * Store a newly created resource in storage.
 	 *

@@ -47,7 +47,7 @@
                                 )) }}
                             <div class="col-lg-10">
                                 {{ Form::text('email', Input::old('email'), array(
-                                    'class' => 'form-control',
+                                    'class' => 'form-control ajaxCheck',
                                     'id' => 'inputName',
                                     )) }}
                                 <span class="help-block">{{$errors->first('email')}}</span>
@@ -80,5 +80,31 @@
 
 
 @section('addjs')
+@stop
 
+@section('page-script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.ajaxCheck').focusout(function(){
+                var self = $(this);
+                $.ajax({
+                    type:'POST',
+                    url: 'errorCheck/',
+                    data :{
+                        key : $(this).attr("name"),
+                        val : $(this).val()
+                    },
+                    success: function(data){
+                        self.parent().find(".help-block").text("");
+                        self.parent('div').parent('div').removeClass('has-error');
+                    },
+                    error: function(data){
+                        self.parent().find(".help-block").text(JSON.parse(data.responseText)[0]);
+                        self.parent('div').parent('div').addClass('has-error');
+                        // Render the errors with js ...
+                    }
+                });
+            });
+        })
+    </script>
 @stop

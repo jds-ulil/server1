@@ -20,5 +20,8 @@ class AdminController extends BaseController {
 		return View::make('admin.index');
 	}
 
-
+	public function infoPage(){
+		// show the form
+		return View::make('admin.info');
+	}
 }

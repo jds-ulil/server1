@@ -27,7 +27,7 @@ return array(
 	*/
 
 	'default' => 'mysql',
-
+	/*'default' => 'sqlite',*/
 	/*
 	|--------------------------------------------------------------------------
 	| Database Connections
